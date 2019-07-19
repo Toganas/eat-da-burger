@@ -18,7 +18,7 @@ let orm = {
         queryString += col.toString();
         queryString += ") VALUES ?;"
             
-        cl(queryString)
+        console.log(queryString)
 
         conn.query(queryString, burger), (err, res) => {
             if (err) throw err;
@@ -26,7 +26,21 @@ let orm = {
         }
 
     },
-    updateOne: (table, col, devour) => {
-        let queryString = 
+    updateOne: (table, col, col2, id, cb) => {
+        let queryString = "UPDATE " + table;
+        queryString += " SET "
+        queryString += col
+        queryString += " = false WHERE "
+        queryString += col2
+        queryString += " = "
+        queryString =+ id
+        queryString =+ ";"
+
+        console.log(queryString)
+
+        conn.query(queryString, (err,res)=>{
+            if (err) throw err;
+            cb(res);
+        })
 }
 }
