@@ -31,3 +31,21 @@ router.post("api/burgers", (req,res)=>{
 });
 
 // updating the devour
+router.put("api/burger/:id", (req,res)=>{
+    // grabbing the id
+    let devoured = "id =" + req.params.id;
+
+    console.log("devour", devoured);
+
+    burger.updateOne({
+        devour: req.body.devour
+    },devoured, (result)=>{
+        if (result.changedRows == 0) {
+            // no rows were changed, which means the ID isn't there, make it a 404
+            return res.status(404).end()
+        } else {
+            res.status(200).end();
+        }
+    })
+
+})
