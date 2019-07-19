@@ -24,6 +24,10 @@ router.post("api/burgers", (req,res)=>{
     ], [
         req.body.name,
     ], (result)=>{
-        res.json({ id: result.insertId});
+        // sending back the result as a json
+        res.json({ id: result.insertId,
+        burger_name:req.body.name });
     });
 });
+
+// updating the devour
