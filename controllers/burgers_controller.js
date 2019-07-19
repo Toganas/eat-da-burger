@@ -17,3 +17,13 @@ router.get("/", (req, res)=>{
         res.render("index", hbsObject);
     });
 });
+// creating an api from the info posted on the page
+router.post("api/burgers", (req,res)=>{
+    burger.create([
+        "burger_name"
+    ], [
+        req.body.name,
+    ], (result)=>{
+        res.json({ id: result.insertId});
+    });
+});
