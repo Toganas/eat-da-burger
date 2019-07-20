@@ -1,3 +1,4 @@
+require("dotenv").config();
 // require mysql
 var mysql = require('mysql');
 // set up connection info
@@ -15,7 +16,7 @@ conn.connect((err)=>{
         console.log("error connecting: " + err.stack);
         return;
     }
-    console.log("connected as id " + connection.threadID);
+    console.log("connected");
 });
 
 // export connection
