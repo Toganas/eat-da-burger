@@ -6,7 +6,7 @@ const exphbs = require("express-handlebars")
 let PORT = process.env.PORT || 3000;
 
 // setting static content as the public directory.
-app.use(express.static("public"));
+app.use(express.static(__dirname + "public"));
 
 // parse into json
 app.use(express.urlencoded ({ extended: true }))

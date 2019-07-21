@@ -3,8 +3,8 @@ const orm = require("../config/orm.js");
 
 let burger = {
     // selecting all
-    selectAll: (cb) => {
-        orm.selectAll("burgers", (res)=>{
+    all: (cb) => {
+        orm.all("burgers", (res)=>{
             cb(res);
         });
     },
@@ -15,8 +15,8 @@ let burger = {
         })
     },
     // updating a burgers devour column
-    updateOne: (col, col2, id, cb) => {
-        orm.update("burgers", col, col2, id, (res) => {
+    updateOne: (val2, cb) => {
+        orm.update("burgers", "devoured", true, "id", val2, (res) => {
             cb(res);
         });
     }

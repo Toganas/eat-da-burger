@@ -7,21 +7,50 @@
     </div>
     <div class="row">
         <div class="col-4" id="burgers">
+            <h1>Burgers to Eat!</h1>
+            <hr>
+            <ul>
+                {{#each burgers}}
+                    {{#unless this.devoured}}
+                        <h1>{{this.burger_name}}</h1>
+                {{!-- <a class="btn btn-primary fas fa-hamburger" id="{{this.id}}" href="/api/burger/{{id}}/1"> &nbsp;Eat this Burger</a> --}}
+                        <form method="POST" action="/burger/update?_method=PUT" class="button-size">
+                            <input type="hidden" name="burger_id" type="text" value={{this.id}}>
+                            <br>
+                            <button data-id={{id}} data-dev="false" class="fas fa-hamburger eatMe"> &nbsp; Eat this
+                            burger!</button>
+                        </form>
+                    {{/unless}}
+                {{/each}}
+            </ul>
             {{!-- burgers to eat go here --}}
         </div>
 
         <div class="col-4 offset-4" id="devoured">
+            <h1>Devoured Burgers</h1>
+            <hr>
+            <ul>
+                {{#each burgers}}
+                {{#if devoured}}
+                <h1>{{burger_name}}</h1>
+                {{/if}}
+                {{/each}}
+            </ul>
             {{!-- burgers that have been devoured go here --}}
         </div>
     </div>
-    <div class="row">
-        <div class="col-4 offset-4">
-            <textarea name="newBurger" id="newBurger" cols="5" rows="15"></textarea>
+
+
+    <form>
+        <div class="form row">
+            <div class="col-5 offset-3">
+                <input type="text" class="form-control" placeholder="Your Favorite Burger" id="newBurger"
+                    required></input>
+            </div>
         </div>
-    </div>
-    <div class="row">
         <div class="col-2 offset-5">
             <button id="submit">Submit</button>
         </div>
-    </div>
+    </form>
+</div>
 </div>

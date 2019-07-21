@@ -1,14 +1,15 @@
 // requiring dependencies
 const express = require("express");
 const burger = require("../models/burger.js");
-const router = express.Router();
+let router = express.Router();
 
 // creating routing
 
 // getting the information to put it on a webpage
 router.get("/", (req, res) => {
-    burger.selectAll((data) => {
+    burger.all((data, err) => {
         // handlebars object
+        if (err) throw err;
         let hbsObject = {
             burgers: data
         };
@@ -17,38 +18,37 @@ router.get("/", (req, res) => {
         res.render("index", hbsObject);
     });
 });
-// creating an api from the info posted on the page
-router.post("api/burgers", (req, res) => {
-    // creating the burger
-    burger.create([
-        "burger_name"
-    ], [
-            req.body.name,
-        ], (result) => {
-            // sending back the result as a json
-            res.json({
-                id: result.insertId,
-                burger_name: req.body.name
-            });
-        });
-});
+// // creating an api from the info posted on the page
+// router.post("api/burgers", (req, res) => {
+//     // creating the burger
+//     burger.create([
+//         "burger_name"
+//     ], [
+//             req.body.name,
+//         ], (result, err) => {
+//             // sending back the result as a json
+//             if (err) throw err;
+//             res.json({
+//                 id: result.insertId,
+//                 burger_name: req.body.name
+//             });
+//         });
+// });
 
 // updating the devour
-router.put("api/burger/:id", (req, res) => {
-    // grabbing the id
-    let devoured = "id =" + req.params.id;
+router.put("/api/burger/:id/", (req, res) => {
 
-    console.log("devour", devoured);
-
-    burger.updateOne({
-        devour: req.body.devour
-    }, devoured, (result) => {
-        if (result.changedRows == 0) {
-            // no rows were changed, which means the ID isn't there, make it a 404
-            return res.status(404).end()
-        } else {
-            res.status(200).end();
-        }
+    let id = req.params.id;
+    
+    burger.update(id, (result, err) => {
+        console.log(result);
+        if (err) throw err;
+        // if (result.changedRows == 0) {
+        //     // no rows were changed, which means the ID isn't there, make it a 404
+        //     return res.status(404).end()
+        // } else {
+            res.redirect('/');
+        // }
     })
 
 })
