@@ -50,9 +50,8 @@ let orm = {
         let queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += col.toString();
-        queryString += ") VALUES ("
-        queryString += makeQuestionMarks(burger.length);
-        queryString += ") ";
+        queryString += ") VALUES "
+        queryString += burger;
 
         console.log(queryString)
         // querying mysql
@@ -65,7 +64,7 @@ let orm = {
     // updating a burger from devoured =  false to true
     update: (table, col, val1, col2, val2, cb) => {
         // creating the query string
-        // UPDATE burgers SET DEVOURED = true WHERE id = 1
+        // UPDATE burgers SET DEVOURED = true WHERE id = ?
         let queryString = "UPDATE " + table;
         queryString += " SET ";
         queryString += col;
@@ -76,6 +75,8 @@ let orm = {
         queryString += " = "
         queryString += val2
         queryString += ";"
+
+        
 
         console.log(queryString)
         // query mysql

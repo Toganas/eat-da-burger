@@ -9,21 +9,16 @@
         <div class="col-4" id="burgers">
             <h1>Burgers to Eat!</h1>
             <hr>
+            {{!-- burgers to eat go here --}}
             <ul>
                 {{#each burgers}}
-                    {{#unless this.devoured}}
-                        <h1>{{this.burger_name}}</h1>
-                {{!-- <a class="btn btn-primary fas fa-hamburger" id="{{this.id}}" href="/api/burger/{{id}}/1"> &nbsp;Eat this Burger</a> --}}
-                        <form method="POST" action="/burger/update?_method=PUT" class="button-size">
-                            <input type="hidden" name="burger_id" type="text" value={{this.id}}>
-                            <br>
-                            <button data-id={{id}} data-dev="false" class="fas fa-hamburger eatMe"> &nbsp; Eat this
-                            burger!</button>
-                        </form>
+                    {{#unless devoured}}
+                        <h1>{{burger_name}}</h1>
+                        <a class="btn btn-primary fas fa-hamburger" href="/api/burger/1/{{id}}"> &nbsp;Eat this Burger</a>
+                        {{!-- <button data-id={{id}} data-dev="false" class="fas fa-hamburger eatMe"> &nbsp; Eat this burger!</button> --}}
                     {{/unless}}
                 {{/each}}
             </ul>
-            {{!-- burgers to eat go here --}}
         </div>
 
         <div class="col-4 offset-4" id="devoured">
@@ -31,9 +26,9 @@
             <hr>
             <ul>
                 {{#each burgers}}
-                {{#if devoured}}
-                <h1>{{burger_name}}</h1>
-                {{/if}}
+                    {{#if devoured}}
+                        <h1>{{burger_name}}</h1>
+                    {{/if}}
                 {{/each}}
             </ul>
             {{!-- burgers that have been devoured go here --}}
@@ -43,13 +38,13 @@
 
     <form>
         <div class="form row">
-            <div class="col-5 offset-3">
-                <input type="text" class="form-control" placeholder="Your Favorite Burger" id="newBurger"
-                    required></input>
+            <div class="col-5 offset-3 form-group">
+                <label for="newBurger">What burger would you like to eat?</label>
+                <input type="text" class="form-control" id="newBurger" name="newBurger">
             </div>
         </div>
         <div class="col-2 offset-5">
-            <button id="submit">Submit</button>
+            <button type="submit" id="submit">Submit</button>
         </div>
     </form>
 </div>

@@ -7,7 +7,7 @@ let router = express.Router();
 
 // getting the information to put it on a webpage
 router.get("/", (req, res) => {
-    burger.all((data, err) => {
+    burger.selectAll((data, err) => {
         // handlebars object
         if (err) throw err;
         let hbsObject = {
@@ -19,36 +19,37 @@ router.get("/", (req, res) => {
     });
 });
 // // creating an api from the info posted on the page
-// router.post("api/burgers", (req, res) => {
-//     // creating the burger
-//     burger.create([
-//         "burger_name"
-//     ], [
-//             req.body.name,
-//         ], (result, err) => {
-//             // sending back the result as a json
-//             if (err) throw err;
-//             res.json({
-//                 id: result.insertId,
-//                 burger_name: req.body.name
-//             });
-//         });
-// });
+router.post("api/burgers", (req, res) => {
+    // creating the burger
+    burger.create([
+        "burger_name"
+    ], [
+            req.body.newBurger,
+        ], (result, err) => {
+            // sending back the result as a json
+            if (err) throw err;
+            res.json({
+                id: result.insertId,
+                burger_name: req.body.newBurger
+            });
+        });
+});
 
 // updating the devour
-router.put("/api/burger/:id/", (req, res) => {
+router.put("/api/burger/:dev/:id", (req, res) => {
 
-    let id = req.params.id;
-    
-    burger.update(id, (result, err) => {
-        console.log(result);
+    var id = req.params.id;
+    var devoured = req.params.dev;
+   
+
+    burger.update(devoured, id, (result, err) => {
         if (err) throw err;
-        // if (result.changedRows == 0) {
-        //     // no rows were changed, which means the ID isn't there, make it a 404
-        //     return res.status(404).end()
-        // } else {
+        if (result.changedRows == 0) {
+            // no rows were changed, which means the ID isn't there, make it a 404
+            return res.status(404).end()
+        } else {
             res.redirect('/');
-        // }
+        }
     })
 
 })
