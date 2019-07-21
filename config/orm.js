@@ -1,26 +1,58 @@
 // require connection
-const conn = require("./connection.js")
+const conn = require("./connection.js");
+
+// Making Question Marks for our selections
+// makeQuestionMarks = (num) => {
+//     let arr = [];
+
+//     for (var i = 0; i < num; i++) {
+//         arr.push("?");
+//     }
+
+//     return arr.toString();
+// }
+
+// // Making Object key/value pairs fit SQL syntax
+// sqlReady = (ob) =>{
+//     let arr = [];
+
+//     // looping through keys and pushing as a string into array
+//     for (let key in ob) {
+//         let value = ob[key];
+//         // check hidden properties
+//         if(Object.hasOwnProperty.call(ob, key)) {
+//             if (typeof value === "string" && value.indexOf (" ") >=0){
+//                 value= "'" + value + "'"
+//             }
+
+//             arr.push(key+"="+value);
+//         }
+//     }
+//     return arr.toString();
+// }
 
 // create orm
 let orm = {
     // select all
-    selectAll: (table, cb) => {
+    all: (table, cb) => {
         // creating the query
-        let queryString = "SELECT * FROM" + table + ";"
+        let queryString = "SELECT * FROM " + table + ";"
         // querying the database
-        conn.query(queryString), [table], (err, res) => {
+        conn.query(queryString, (err, res) => {
             if (err) throw err;
             cb(res);
-        }
+        });
 
     },
     // adding one burger to the database
-    insertOne: (table, col, burger, cb) => {
+    create: (table, col, burger, cb) => {
         // building the query String
-        let queryString = "INSERT INTO" + table;
+        let queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += col.toString();
-        queryString += ") VALUES ?;"
+        queryString += ") VALUES ("
+        queryString += makeQuestionMarks(burger.length);
+        queryString += ") ";
 
         console.log(queryString)
         // querying mysql
@@ -31,16 +63,19 @@ let orm = {
 
     },
     // updating a burger from devoured =  false to true
-    updateOne: (table, col, col2, id, cb) => {
+    update: (table, col, val1, col2, val2, cb) => {
         // creating the query string
+        // UPDATE burgers SET DEVOURED = true WHERE id = 1
         let queryString = "UPDATE " + table;
-        queryString += " SET "
-        queryString += col
-        queryString += " = false WHERE "
-        queryString += col2
+        queryString += " SET ";
+        queryString += col;
+        queryString += " = ";
+        queryString = + val1;
+        queryString += " WHERE ";
+        queryString += col2;
         queryString += " = "
-        queryString = + id
-        queryString = + ";"
+        queryString += val2
+        queryString += ";"
 
         console.log(queryString)
         // query mysql
