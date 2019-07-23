@@ -1,12 +1,14 @@
 // requiring dependencies
 const express = require("express");
 const burger = require("../models/burger.js");
-let router = express.Router();
+const router = express.Router();
 
 // creating routing
-
-// getting the information to put it on a webpage
 router.get("/", (req, res) => {
+    res.redirect("/burgers");
+});
+// getting the information to put it on a webpage
+router.get("/burgers", (req, res) => {
     burger.selectAll((data, err) => {
         // handlebars object
         if (err) throw err;
@@ -15,17 +17,17 @@ router.get("/", (req, res) => {
     });
 });
 // // creating an api from the info posted on the page
-router.post("api/burgers", (req, res) => {
+router.post("/burgers/create", (req, res) => {
     // creating the burger
-    burger.insertOne(req.body.burger_name, (result, err) => {
-        // sending back the result as a json
-        if (err) throw err;
-        res.redirect("/")
+    burger.insertOne(req.body.burger_name, (err, result) => {
+        // render back to index
+        console.log(result);
     });
+    res.redirect("/")
 });
 
 // updating the devour
-router.put("/api/burger/:id", (req, res) => {
+router.put("/burgers/:id", (req, res) => {
     burger.updateOne(req.params.id, (result, err) => {
         if (err) throw err;
         if (result.changedRows == 0) {
