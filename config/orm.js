@@ -2,34 +2,26 @@
 const conn = require("./connection.js");
 
 // Making Question Marks for our selections
-// makeQuestionMarks = (num) => {
-//     let arr = [];
+makeQuestionMarks = (num) => {
+    let arr = [];
 
-//     for (var i = 0; i < num; i++) {
-//         arr.push("?");
-//     }
+    for (var i = 0; i < num; i++) {
+        arr.push("?");
+    }
 
-//     return arr.toString();
-// }
+    return arr.toString();
+}
 
-// // Making Object key/value pairs fit SQL syntax
-// sqlReady = (ob) =>{
-//     let arr = [];
+// Making Object key/value pairs fit SQL syntax
+sqlReady = (ob) => {
+    let arr = [];
 
-//     // looping through keys and pushing as a string into array
-//     for (let key in ob) {
-//         let value = ob[key];
-//         // check hidden properties
-//         if(Object.hasOwnProperty.call(ob, key)) {
-//             if (typeof value === "string" && value.indexOf (" ") >=0){
-//                 value= "'" + value + "'"
-//             }
-
-//             arr.push(key+"="+value);
-//         }
-//     }
-//     return arr.toString();
-// }
+    // looping through keys and pushing as a string into array
+    for (let key in ob) {
+        arr.push(key + "=" + value);
+    }
+    return arr.toString();
+}
 
 // create orm
 let orm = {
@@ -76,7 +68,7 @@ let orm = {
         queryString += val2
         queryString += ";"
 
-        
+
 
         console.log(queryString)
         // query mysql
