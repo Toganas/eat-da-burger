@@ -14,10 +14,12 @@
                 {{#each burgers}}
                     {{#unless devoured}}
                         <h1>{{this.burger_name}}</h1>
+                            <form class = "eatMe">
                         {{!-- <a class="btn btn-primary fas fa-hamburger" href="/api/burger/1/{{id}}"> &nbsp;Eat this Burger</a> --}}
-                        <input type="hidden" class="burger_id" type="text" value={{this.id}}>
-                        <br>
-                        <button data-id={{id}} data-dev="false" class="fas fa-hamburger eatMe"> &nbsp; Eat this burger!</button>
+                                <input type="hidden" class="burger_id" type="text" value={{this.id}}>
+                                <button data-id={{id}} data-dev="false" class="fas fa-hamburger"> &nbsp; Eat this burger!</button>
+                            </form>
+                            <br>
                     {{/unless}}
                 {{/each}}
             </ul>
