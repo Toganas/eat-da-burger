@@ -10,12 +10,8 @@ router.get("/", (req, res) => {
     burger.selectAll((data, err) => {
         // handlebars object
         if (err) throw err;
-        let burger_data = {
-            burgers: data
-        };
-        console.log(burger_data);
         // render on page using the index handlebars page
-        res.render("index", burger_data);
+        res.render("index", { burger_data: data });
     });
 });
 // // creating an api from the info posted on the page
