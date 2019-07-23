@@ -10,8 +10,8 @@ let burger = {
     },
     // Adding a burger to the database
     insertOne: (burger, cb) => {
-        orm.insertOne("burgers",
-            ["burger_name", "devoured"
+        orm.insertOne("burgers",[
+            "burger_name", "devoured"
             ], [
                 burger, false
             ], cb);
