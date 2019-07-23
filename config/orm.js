@@ -26,7 +26,7 @@ sqlReady = (ob) => {
 // create orm
 let orm = {
     // select all
-    all: (table, cb) => {
+    selectAll: (table, cb) => {
         // creating the query
         let queryString = "SELECT * FROM " + table + ";"
         // querying the database
@@ -37,13 +37,14 @@ let orm = {
 
     },
     // adding one burger to the database
-    create: (table, col, burger, cb) => {
+    insertOne: (table, col, burger, cb) => {
         // building the query String
         let queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += col.toString();
-        queryString += ") VALUES "
-        queryString += burger;
+        queryString += ") VALUES ("
+        queryString += printQuestionMarks(burger.length);
+        queryString += ") ";
 
         console.log(queryString)
         // querying mysql
@@ -54,19 +55,14 @@ let orm = {
 
     },
     // updating a burger from devoured =  false to true
-    update: (table, col, val1, col2, val2, cb) => {
+    updateOne: (table, ColVals, devour cb) => {
         // creating the query string
         // UPDATE burgers SET DEVOURED = true WHERE id = ?
         let queryString = "UPDATE " + table;
         queryString += " SET ";
-        queryString += col;
-        queryString += " = ";
-        queryString = + val1;
+        queryString += sqlReady(ColVals);
         queryString += " WHERE ";
-        queryString += col2;
-        queryString += " = "
-        queryString += val2
-        queryString += ";"
+        queryString += devour;
 
 
 
