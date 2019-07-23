@@ -42,8 +42,9 @@ let orm = {
         let queryString = "INSERT INTO " + table;
         queryString += " (";
         queryString += col.toString();
-        queryString += ") VALUES ("
-        queryString += printQuestionMarks(burger.length);
+        queryString += ") ";
+        queryString += "VALUES ("
+        queryString += makeQuestionMarks(burger.length);
         queryString += ") ";
 
         console.log(queryString)
