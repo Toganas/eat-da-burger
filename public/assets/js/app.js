@@ -1,17 +1,16 @@
-$(document).ready(()=>{
+$(document).ready(() => {
 
-$(".eatMe").on("submit", (event) => {
-    event.preventDefault();
-
-    let burger_id = $(this).children(".burger_id").val();
+    $(".eatMe").on("submit", (event) => {
+        event.preventDefault();
+        // capturing the value of burger_id
+        let burger_id = $(this).children(".burger_id").val();
         console.log(burger_id);
+        // ajax call to put
+        $.ajax({
+            url: "/api/burger/" + burger_id,
+            method: "PUT"
+        }).then((result) => {
+            location.reload();
+        })
     });
 });
-
-//    let dataid = $(this).attr("data-id");
-//     let dataval = $(this).attr("data-val", true);
-    // $.ajax({url:"/api/burger/", method: "PUT", data: data}).then(function(result){
-    //     console.log("hello");
-    // })
-// })
-// })
