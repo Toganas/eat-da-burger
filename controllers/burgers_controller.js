@@ -21,34 +21,22 @@ router.get("/", (req, res) => {
 // // creating an api from the info posted on the page
 router.post("api/burgers", (req, res) => {
     // creating the burger
-    burger.create([
-        "burger_name"
-    ], [
-            req.body.newBurger,
-        ], (result, err) => {
+    burger.insertOne(req.body.burger_name, (result, err) => {
             // sending back the result as a json
             if (err) throw err;
-            res.json({
-                id: result.insertId,
-                burger_name: req.body.newBurger
-            });
+            res.redirect("/")
         });
 });
 
 // updating the devour
-router.put("/api/burger/:dev/:id", (req, res) => {
-
-    var id = req.params.id;
-    var devoured = req.params.dev;
-   
-
-    burger.update(devoured, id, (result, err) => {
+router.put("/api/burger/:id", (req, res) => {
+       burger.updateOne(req.params.id, (result, err) => {
         if (err) throw err;
         if (result.changedRows == 0) {
             // no rows were changed, which means the ID isn't there, make it a 404
             return res.status(404).end()
         } else {
-            res.redirect('/');
+            res.sendStatus(200);
         }
     })
 
