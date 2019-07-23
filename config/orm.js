@@ -55,7 +55,7 @@ let orm = {
 
     },
     // updating a burger from devoured =  false to true
-    updateOne: (table, ColVals, devour cb) => {
+    updateOne: (table, ColVals, devour, cb) => {
         // creating the query string
         // UPDATE burgers SET DEVOURED = true WHERE id = ?
         let queryString = "UPDATE " + table;
