@@ -11,8 +11,8 @@
             <hr>
             {{!-- burgers to eat go here --}}
             <ul>
-                {{#each burgers}}
-                    {{#unless devoured}}
+                {{#each burger_data}}
+                    {{#unless this.devoured}}
                         <h1>{{this.burger_name}}</h1>
                             <form class = "eatMe">
                         {{!-- <a class="btn btn-primary fas fa-hamburger" href="/api/burger/1/{{id}}"> &nbsp;Eat this Burger</a> --}}
