@@ -18,7 +18,7 @@ sqlReady = (ob) => {
 
     // looping through keys and pushing as a string into array
     for (let key in ob) {
-        arr.push(key + "=" + value);
+        arr.push(key + "=" + ob[key]);
     }
     return arr.toString();
 }
