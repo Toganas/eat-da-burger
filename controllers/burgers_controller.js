@@ -23,21 +23,15 @@ router.post("/burgers/create", (req, res) => {
         // render back to index
         console.log(result);
     });
-    res.redirect("/")
+    res.redirect("/");
 });
 
 // updating the devour
 router.put("/burgers/:id", (req, res) => {
     burger.updateOne(req.params.id, (result, err) => {
-        if (err) throw err;
-        if (result.changedRows == 0) {
-            // no rows were changed, which means the ID isn't there, make it a 404
-            return res.status(404).end()
-        } else {
-            res.sendStatus(200);
-        }
-    })
-
-})
+        console.log(result);
+        res.sendStatus(200);
+    });
+});
 
 module.exports = router
