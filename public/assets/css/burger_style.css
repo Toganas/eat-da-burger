@@ -1,0 +1,30 @@
+.fas {
+   color: #743F19;
+   border: #6ECC3F 1px solid;
+   background-color: black;
+   padding: 8px;
+   margin-top: 3px
+}
+
+h1{
+    color: #995A42
+}
+
+hr {
+    color: #FF0817;
+    background-color: #FF0817
+}
+
+.jumbotron {
+    background-color: #221C15;
+    color: white;
+}
+
+#title {
+    color: white
+}
+
+body {
+    background-color: #221C15;
+    color: #FFA508
+}
