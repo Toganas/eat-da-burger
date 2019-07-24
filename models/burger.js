@@ -21,7 +21,7 @@ let burger = {
         let condition = "id=" + id;
         orm.updateOne("burgers", {
             devoured: true
-        }, condition, db);
+        }, condition, cb);
     }
 };
 
