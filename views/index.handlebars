@@ -1,9 +1,10 @@
 <div class="container">
-    <div class="jumbotron">
-        <h1>Eat Da Burger</h1>
-
-        <h3> I know you're hungry! Tell me what burger you would like to eat! Or click on one that's already been
-            created on the left!</h3>
+    <div class="jumbotron text-center">
+        <h1>Eat Da Burger!</h1>
+        <img src = "/assets/img/cheeseburger.png" alt="Yummy Cheeseburger" height="200px">
+        <h3 class="mt-4">I know you're hungry! Tell me what burger you would like to eat!
+            <br>
+         Or click on one that's already been created on the left!</h3>
     </div>
     <div class="row">
         <div class="col-4 task" id="burgers">
@@ -12,7 +13,7 @@
             {{!-- burgers to eat go here --}}
                 {{#each burger_data}}
                     {{#unless this.devoured}}
-                        <h1>{{this.burger_name}}</h1>
+                        <h3>{{this.burger_name}}</h3>
                         <form class="eatMe">
                     {{!-- <a class="btn btn-primary fas fa-hamburger" href="/api/burger/1/{{id}}"> &nbsp;Eat this Burger</a> --}}
                             <input type="hidden" class="burger_id" type="text" value={{this.id}}>
@@ -28,9 +29,10 @@
             <hr>
             <ul>
                 {{#each burger_data}}
-                {{#if this.devoured}}
-                <h1>{{this.burger_name}}</h1>
-                {{/if}}
+                    {{#if this.devoured}}
+                        <h3>{{this.burger_name}}</h3>
+                        <br>
+                    {{/if}}
                 {{/each}}
             </ul>
             {{!-- burgers that have been devoured go here --}}
